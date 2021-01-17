@@ -12,7 +12,7 @@ namespace ScrabbleGame.Models
             // Set random letter
             var random = new Random();
             var letterNumber = random.Next(0, 26);
-            Letter = (char)('a' + letterNumber);
+            Letter = (char)('A' + letterNumber);
             Point = point;
         }
     }

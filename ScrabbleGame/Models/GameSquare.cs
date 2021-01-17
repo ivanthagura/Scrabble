@@ -17,10 +17,10 @@
         {
             if (Tile != null)
             {
-                return Tile.Letter.ToString();
+                return $"{Tile.Letter.ToString()}|";
             }
 
-            return $"[{Row} {Column}]";
+            return $" |";
         }
     }
 }
