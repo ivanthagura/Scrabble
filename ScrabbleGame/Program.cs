@@ -14,18 +14,12 @@ namespace ScrabbleGame
             startup.ConfigureServices(services);
             IServiceProvider serviceProvider = services.BuildServiceProvider();
 
-            //configure console logging
             var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-
             var logger = serviceProvider.GetService<ILoggerFactory>()
                 .CreateLogger<Program>();
 
-            logger.LogDebug("Logger is working!");
-
-            // Get Service and call method
-            var service = serviceProvider.GetService<IEnglishDictionaryService>();
-            var words = service.GetWords();
-            Console.WriteLine(words[0]);
+            var game = serviceProvider.GetService<IGameService>();
+            game.StartGame();
         }
     }
 }

@@ -22,8 +22,9 @@ namespace ScrabbleGame
             services.AddLogging();
             services.AddOptions();
             services.Configure<DictionaryConfiguration>(Configuration.GetSection("EnglishDictionary"));
-            //services.AddSingleton(Configuration);
+
             services.AddSingleton<IEnglishDictionaryService, EnglishDictionaryService>();
+            services.AddSingleton<IGameService, GameService>();
         }
     }
 }
