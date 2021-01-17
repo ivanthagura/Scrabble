@@ -11,6 +11,7 @@ namespace ScrabbleGame.Models
         public int Size { get; private set; }
         public List<Tile> Tiles { get; set; }
         public int Score { get; private set; }
+        public bool Yeild { get; private set; }
 
         public Rack(string name, bool isTurn, int size = 7)
         {
@@ -19,6 +20,7 @@ namespace ScrabbleGame.Models
             Size = size;
             Tiles = new List<Tile>();
             Score = 0;
+            Yeild = false;
         }
 
         public void AddPoints(int points)
@@ -36,6 +38,11 @@ namespace ScrabbleGame.Models
             IsTurn = turn;
         }
 
+        public void YeildGame()
+        {
+            Yeild = true;
+        }
+
         public string PlayWord()
         {
             Console.WriteLine("Available Letters : " + PrintAvailableLetters());
@@ -43,7 +50,7 @@ namespace ScrabbleGame.Models
             return word.ToLower();
         }
 
-        private string PrintAvailableLetters()
+        public string PrintAvailableLetters()
         {
             var delimiter = " , ";
             return Tiles.Select(t => t.Letter.ToString()).Aggregate((i, j) => i + delimiter + j);

@@ -1,24 +1,34 @@
-﻿using System.Collections.Generic;
-
-namespace ScrabbleGame.Models
+﻿namespace ScrabbleGame.Models
 {
     public class GameBoard
     {
-        const int row = 15;
-        const int column = 15;
+        const int totalRows = 15;
+        const int totalColumns = 15;
 
         public GameSquare[,] Squares { get; private set; }
 
         public GameBoard()
         {
-            Squares = new GameSquare[row, column];
-            for (int i = 0; i < row; i++)
+            Squares = new GameSquare[totalRows, totalColumns];
+            for (int r = 0; r < totalRows; r++)
             {
-                for (int j = 0; j < column; j++)
+                for (int c = 0; c < totalColumns; c++)
                 {
-                    Squares[i, j] = new GameSquare(i, j);
+                    Squares[r, c] = new GameSquare(r, c, totalRows, totalColumns);
                 }
             }
+        }
+
+        public GameSquare GetMiddleSquare()
+        {
+            foreach (var square in Squares)
+            {
+                if(square.IsMiddle)
+                {
+                    return square;
+                }
+            }
+            return null;
         }
     }
 }

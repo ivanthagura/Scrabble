@@ -22,23 +22,12 @@ namespace ScrabbleGame.Models
             Dictionary = dictionary;
         }
 
-        public void AssignTilesToPlayer1Rack()
+        public void AssignTilesToPlayerRack(Rack playerRack)
         {
-            var rackCount = Player1Rack.Tiles.Count;
-            while (rackCount < Player1Rack.Size)
+            var rackCount = playerRack.Tiles.Count;
+            while (rackCount < playerRack.Size && Tiles.Count > 0)
             {
-                Player1Rack.Tiles.Add(Tiles.First());
-                Tiles.RemoveAt(0);
-                rackCount++;
-            }
-        }
-
-        public void AssignTilesToPlayer2Rack()
-        {
-            var rackCount = Player2Rack.Tiles.Count;
-            while (rackCount < Player2Rack.Size)
-            {
-                Player2Rack.Tiles.Add(Tiles.First());
+                playerRack.Tiles.Add(Tiles.First());
                 Tiles.RemoveAt(0);
                 rackCount++;
             }
@@ -46,13 +35,17 @@ namespace ScrabbleGame.Models
 
         public bool PlayTurn()
         {
-            if(Player1Rack.IsTurn)
+            if(Player1Rack.IsTurn && !Player1Rack.Yeild)
             {
                 Play(Player1Rack);
+                Player2Rack.SetTurn(true);
+                return true;
             }
-            else if(Player2Rack.IsTurn)
+            else if(Player2Rack.IsTurn && !Player2Rack.Yeild)
             {
                 Play(Player2Rack);
+                Player1Rack.SetTurn(true);
+                return true;
             }
             return false;
         }
@@ -60,6 +53,8 @@ namespace ScrabbleGame.Models
         private bool Play(Rack Player)
         {
             Console.WriteLine($"{Player.Name}'s turn");
+            Console.WriteLine("Type 'yeild' to yeild game");
+            Console.WriteLine("Form a word from letters from your rack");
             bool isValidWord;
 
             do
@@ -68,6 +63,7 @@ namespace ScrabbleGame.Models
                 if (word.Equals(ConstantStrings.YEILD))
                 {
                     Player.SetTurn(false);
+                    Player.YeildGame();
                     break;
                 }
                 else if (!WordIsFormedFromAvailableLetters(Player.Tiles, word.ToUpper()))
@@ -84,7 +80,15 @@ namespace ScrabbleGame.Models
                     }
                     else
                     {
-                        Console.WriteLine(word);
+                        Player.AddPoints(word.Length);
+                        Console.WriteLine($"Current points for {Player.Name} : {Player.Score}");
+                        RemoveWordTilesFromPlayerRack(Player.Tiles, word.ToUpper());
+                        Player.SetTurn(false);
+                        Console.WriteLine("Remaining letters : " + Player.PrintAvailableLetters());
+                        Console.WriteLine("Adding new letters");
+                        AssignTilesToPlayerRack(Player);
+                        Console.WriteLine("Available letters : " + Player.PrintAvailableLetters());
+                        Console.WriteLine();
                     }
                 }
             } while (!isValidWord);
@@ -112,6 +116,15 @@ namespace ScrabbleGame.Models
         private bool ValidateWord(string word)
         {
             return Dictionary.Contains(word);
+        }
+
+        private void RemoveWordTilesFromPlayerRack(List<Tile> playerTiles, string word)
+        {
+            foreach (var letter in word)
+            {
+                var tileToRemove = playerTiles.Where(t => t.Letter.Equals(letter)).First();
+                playerTiles.Remove(tileToRemove);
+            }
         }
     }
 }
