@@ -48,5 +48,10 @@
 
             return $"   |";
         }
+
+        public bool IsSquareFilled()
+        {
+            return Tile != null;
+        }
     }
 }

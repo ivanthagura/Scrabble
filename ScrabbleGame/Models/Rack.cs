@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScrabbleGame.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -48,6 +49,33 @@ namespace ScrabbleGame.Models
             Console.WriteLine("Available Letters : " + PrintAvailableLetters());
             var word = Console.ReadLine();
             return word.ToLower();
+        }
+
+        public string PlayHorizontalOrVertical()
+        {
+            Console.WriteLine("Play Horizontal(h) or Vertical(v)?");
+            var decision = "";
+            var validDecision = false;
+            do
+            {
+                decision = Console.ReadLine();
+                if (decision.Equals("h"))
+                {
+                    decision = ConstantStrings.HORIZONTAL;
+                    validDecision = true;
+                }
+                else if (decision.Equals("v"))
+                {
+                    decision = ConstantStrings.VERTICAL;
+                    validDecision = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid decision. Press 'h' for Horizontal and 'v' for Vertical");
+                }
+            } while (!validDecision);
+
+            return decision;
         }
 
         public string PrintAvailableLetters()
