@@ -80,6 +80,7 @@ namespace ScrabbleGame.Services
                 Console.WriteLine("");
                 Console.WriteLine("  -------------------------------------------------------------");
             }
+            Console.WriteLine();
         }
 
         private List<Tile> CreateTilePack()

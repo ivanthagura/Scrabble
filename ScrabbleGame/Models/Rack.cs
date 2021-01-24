@@ -44,6 +44,28 @@ namespace ScrabbleGame.Models
             Yeild = true;
         }
 
+        public char SelectLetterFromBoard(List<char> letters)
+        {
+            Console.WriteLine("Select one letter from the board to form the word");
+            var isValid = false;
+            char letter;
+            do
+            {
+                var letterString = Console.ReadLine();
+                letter = letterString.ToUpper().ToCharArray()[0];
+                if(letters.Contains(letter))
+                {
+                    isValid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Selected letter not available to make word. Please select from avaialble letters");
+                }
+            } while (!isValid);
+
+            return letter;
+        }
+
         public string PlayWord()
         {
             Console.WriteLine("Available Letters : " + PrintAvailableLetters());

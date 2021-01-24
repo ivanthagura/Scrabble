@@ -10,6 +10,14 @@
         public bool IsBottomCorner { get; set; }
         public bool IsLeftCorner { get; set; }
         public bool IsRightCorner { get; set; }
+        public bool IsTopFilled { get; set; }
+        public bool IsBottomFilled { get; set; }
+        public bool IsLeftFilled { get; set; }
+        public bool IsRightFilled { get; set; }
+        public bool IsTopLeftFilled { get; set; }
+        public bool IsTopRightFilled { get; set; }
+        public bool IsBottomLeftFilled { get; set; }
+        public bool IsBottomRightFilled { get; set; }
 
         public GameSquare(int row, int column, int totalRows, int totalColumns)
         {
