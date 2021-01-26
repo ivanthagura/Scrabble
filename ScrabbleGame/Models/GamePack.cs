@@ -91,7 +91,20 @@ namespace ScrabbleGame.Models
                 }
                 else if (!WordIsFormedFromAvailableLetters(Player.Tiles, selectedTile, word.ToUpper()))
                 {
+                    Console.WriteLine();
                     Console.WriteLine(word + " is not created from the available letters. Please try again or type yeild to give up");
+                    Console.WriteLine("Available letters in rack : " + Player.PrintAvailableLetters());
+                    Console.Write("Available letters in the board : ");
+                    var availableLetterChars = new List<char>();
+                    availableLetters.ForEach(l =>
+                    {
+                        availableLetterChars.Add(l.Letter);
+                        Console.Write(l.Letter + " ");
+                    });
+                    Console.WriteLine();
+
+                    selectedLetter = Player.SelectLetterFromBoard(availableLetterChars);
+                    selectedTile = availableLetters.FirstOrDefault(l => l.Letter == selectedLetter);
                     isValidWord = false;
                 }
                 else
@@ -109,6 +122,7 @@ namespace ScrabbleGame.Models
                         if (wordAdded)
                         {
                             Player.AddPoints(word.Length);
+                            Console.WriteLine();
                             Console.WriteLine($"Current points for {Player.Name} : {Player.Score}");
                             Player.SetTurn(false);
                             Console.WriteLine("Remaining letters : " + Player.PrintAvailableLetters());

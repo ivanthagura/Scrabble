@@ -34,9 +34,7 @@ namespace ScrabbleGame.Models
             {
                 wordStartingPoint = (word.Length / 2);
                 startingPointRow = middleSquare.Row;
-                //    horizontalOrVertical.Equals(ConstantStrings.VERTICAL) ? middleSquare.Row - wordStartingPoint : middleSquare.Row;
                 startingPointColumn = middleSquare.Column - wordStartingPoint;
-                //  horizontalOrVertical.Equals(ConstantStrings.HORIZONTAL) ? middleSquare.Column - wordStartingPoint : middleSquare.Column;
 
                 foreach (var tile in tilesFromTray)
                 {
@@ -70,8 +68,9 @@ namespace ScrabbleGame.Models
                             startingPointRow = selectedSquare.Row;
                             startingPointColumn = selectedSquare.Column;
 
-                            // block top
+                            // block top & bottom
                             selectedSquare.IsTopFilled = true;
+                            selectedSquare.IsBottomFilled = true;
 
                             // go to second letter
                             startingPointRow += 1;
@@ -80,11 +79,8 @@ namespace ScrabbleGame.Models
                             {
                                 Squares[startingPointRow, startingPointColumn].Tile = letter;
 
-                                if(letter == tilesFromTray.Last())
-                                {
-                                    // block bottom
-                                    Squares[startingPointRow, startingPointColumn].IsBottomFilled = true;
-                                }
+                                Squares[startingPointRow, startingPointColumn].IsTopFilled = true;
+                                Squares[startingPointRow, startingPointColumn].IsBottomFilled = true;
 
                                 startingPointRow += 1;
                             }
@@ -95,8 +91,9 @@ namespace ScrabbleGame.Models
                             startingPointRow = selectedSquare.Row;
                             startingPointColumn = selectedSquare.Column;
 
-                            // block left
+                            // block left & right
                             selectedSquare.IsLeftFilled = true;
+                            selectedSquare.IsRightFilled = true;
 
                             // go to second letter
                             startingPointColumn += 1;
@@ -105,11 +102,8 @@ namespace ScrabbleGame.Models
                             {
                                 Squares[startingPointRow, startingPointColumn].Tile = letter;
 
-                                if (letter == tilesFromTray.Last())
-                                {
-                                    // block right
-                                    Squares[startingPointRow, startingPointColumn].IsRightFilled = true;
-                                }
+                                Squares[startingPointRow, startingPointColumn].IsLeftFilled = true;
+                                Squares[startingPointRow, startingPointColumn].IsRightFilled = true;
 
                                 startingPointColumn += 1;
                             }

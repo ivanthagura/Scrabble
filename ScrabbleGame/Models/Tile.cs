@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ScrabbleGame.Models
+﻿namespace ScrabbleGame.Models
 {
     public class Tile
     {
