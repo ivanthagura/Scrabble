@@ -93,6 +93,7 @@ namespace ScrabbleGame.Models
                 {
                     Console.WriteLine();
                     Console.WriteLine(word + " is not created from the available letters. Please try again or type yeild to give up");
+                    Console.WriteLine();
                     Console.WriteLine("Available letters in rack : " + Player.PrintAvailableLetters());
                     Console.Write("Available letters in the board : ");
                     var availableLetterChars = new List<char>();
@@ -103,7 +104,10 @@ namespace ScrabbleGame.Models
                     });
                     Console.WriteLine();
 
-                    selectedLetter = Player.SelectLetterFromBoard(availableLetterChars);
+                    if (availableLetterChars.Count > 0)
+                    {
+                        selectedLetter = Player.SelectLetterFromBoard(availableLetterChars);
+                    }
                     selectedTile = availableLetters.FirstOrDefault(l => l.Letter == selectedLetter);
                     isValidWord = false;
                 }
@@ -113,6 +117,23 @@ namespace ScrabbleGame.Models
                     if (!isValidWord)
                     {
                         Console.WriteLine(word + " is not a valid word. Please try again or type yeild to give up");
+                        Console.WriteLine();
+                        Console.WriteLine("Available letters in rack : " + Player.PrintAvailableLetters());
+                        Console.Write("Available letters in the board : ");
+                        var availableLetterChars = new List<char>();
+                        availableLetters.ForEach(l =>
+                        {
+                            availableLetterChars.Add(l.Letter);
+                            Console.Write(l.Letter + " ");
+                        });
+                        Console.WriteLine();
+
+                        if (availableLetterChars.Count > 0)
+                        {
+                            selectedLetter = Player.SelectLetterFromBoard(availableLetterChars);
+                        }
+                        selectedTile = availableLetters.FirstOrDefault(l => l.Letter == selectedLetter);
+                        isValidWord = false;
                     }
                     // Word is valid. Add to board and calculate points
                     else
@@ -134,6 +155,8 @@ namespace ScrabbleGame.Models
                         }
                         else
                         {
+                            // add the tiles back
+                            AddTilesToPlayerRack(Player.Tiles, tilesToAddToBoard);
                             Console.WriteLine("Cannot add word: "+word+ " to board. Please try again or type yeild to give up");
                             Console.WriteLine("Form a word from letters from your rack and one letter from the board");
                             Console.WriteLine("Available letters in rack : " + Player.PrintAvailableLetters());
@@ -209,6 +232,10 @@ namespace ScrabbleGame.Models
             }
 
             return tilesToAddToBoard;
+        }
+        private void AddTilesToPlayerRack(List<Tile> playerTiles, List<Tile> tilesToAdd)
+        {
+            playerTiles.AddRange(tilesToAdd);
         }
     }
 }

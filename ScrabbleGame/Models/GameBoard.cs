@@ -39,6 +39,8 @@ namespace ScrabbleGame.Models
                 foreach (var tile in tilesFromTray)
                 {
                     Squares[startingPointRow, startingPointColumn].Tile = tile;
+                    Squares[startingPointRow, startingPointColumn].IsLeftFilled = true;
+                    Squares[startingPointRow, startingPointColumn].IsRightFilled = true;
                     startingPointColumn += 1;
                 }
 
@@ -118,7 +120,8 @@ namespace ScrabbleGame.Models
                             startingPointRow = selectedSquare.Row;
                             startingPointColumn = selectedSquare.Column;
 
-                            // block bottom
+                            // block top & bottom
+                            selectedSquare.IsTopFilled = true;
                             selectedSquare.IsBottomFilled = true;
 
                             // go to first letter
@@ -128,11 +131,8 @@ namespace ScrabbleGame.Models
                             {
                                 Squares[startingPointRow, startingPointColumn].Tile = letter;
 
-                                if (letter == tilesFromTray.First())
-                                {
-                                    // block top
-                                    Squares[startingPointRow, startingPointColumn].IsTopFilled = true;
-                                }
+                                Squares[startingPointRow, startingPointColumn].IsTopFilled = true;
+                                Squares[startingPointRow, startingPointColumn].IsBottomFilled = true;
 
                                 startingPointRow += 1;
                             }
@@ -143,7 +143,8 @@ namespace ScrabbleGame.Models
                             startingPointRow = selectedSquare.Row;
                             startingPointColumn = selectedSquare.Column;
 
-                            // block right
+                            // block left & right
+                            selectedSquare.IsLeftFilled = true;
                             selectedSquare.IsRightFilled = true;
 
                             // go to first letter
@@ -153,11 +154,8 @@ namespace ScrabbleGame.Models
                             {
                                 Squares[startingPointRow, startingPointColumn].Tile = letter;
 
-                                if (letter == tilesFromTray.First())
-                                {
-                                    // block left
-                                    Squares[startingPointRow, startingPointColumn].IsLeftFilled = true;
-                                }
+                                Squares[startingPointRow, startingPointColumn].IsLeftFilled = true;
+                                Squares[startingPointRow, startingPointColumn].IsRightFilled = true;
 
                                 startingPointColumn += 1;
                             }
@@ -188,16 +186,8 @@ namespace ScrabbleGame.Models
                                 }
                                 Squares[startingPointRow, startingPointColumn].Tile = letter;
 
-                                if (letter == tilesFromTray.First())
-                                {
-                                    // block top
-                                    Squares[startingPointRow, startingPointColumn].IsTopFilled = true;
-                                }
-                                if (letter == tilesFromTray.Last())
-                                {
-                                    // block bottom
-                                    Squares[startingPointRow, startingPointColumn].IsBottomFilled = true;
-                                }
+                                Squares[startingPointRow, startingPointColumn].IsTopFilled = true;
+                                Squares[startingPointRow, startingPointColumn].IsBottomFilled = true;
 
                                 startingPointRow += 1;
                             }
@@ -224,19 +214,16 @@ namespace ScrabbleGame.Models
                                 }
                                 Squares[startingPointRow, startingPointColumn].Tile = letter;
 
-                                if (letter == tilesFromTray.First())
-                                {
-                                    // block left
-                                    Squares[startingPointRow, startingPointColumn].IsLeftFilled = true;
-                                }
-                                if (letter == tilesFromTray.Last())
-                                {
-                                    // block right
-                                    Squares[startingPointRow, startingPointColumn].IsRightFilled = true;
-                                }
+                                Squares[startingPointRow, startingPointColumn].IsLeftFilled = true;
+                                Squares[startingPointRow, startingPointColumn].IsRightFilled = true;
 
                                 startingPointColumn += 1;
                             }
+                        }
+                        else
+                        {
+                            // Word cannot be placed
+                            return false;
                         }
                     }
                     return true;
