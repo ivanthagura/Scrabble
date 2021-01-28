@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ScrabbleGame": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

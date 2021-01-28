@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hmFdXb/fO5QjQxezVFNGwoWEu1eiUHst9GFQiXea0ARdOWNH0QJTOCAgz9LKj2v1kerO61yx4njiv/+BH1EXOQ==",
+  "dgSpecHash": "sg2fros3BJ0616783IvW6LgbgkNGssm//hO45tu5m/Srhp0RNwDeC3cpxLBXyrFt+dNqOsMNIRwJ/mcpUL91tg==",
   "success": true,
   "projectFilePath": "C:\\Users\\ivant\\source\\repos\\Scrabble\\ScrabbleGame\\ScrabbleGame.csproj",
   "expectedPackageFiles": [
@@ -22,6 +22,7 @@
     "C:\\Users\\ivant\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\5.0.0\\microsoft.extensions.options.configurationextensions.5.0.0.nupkg.sha512",
     "C:\\Users\\ivant\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
     "C:\\Users\\ivant\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\ivant\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.9\\microsoft.visualstudio.azure.containers.tools.targets.1.10.9.nupkg.sha512",
     "C:\\Users\\ivant\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\ivant\\.nuget\\packages\\system.configuration.configurationmanager\\5.0.0\\system.configuration.configurationmanager.5.0.0.nupkg.sha512",
     "C:\\Users\\ivant\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.0\\system.diagnostics.diagnosticsource.5.0.0.nupkg.sha512",
